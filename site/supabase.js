@@ -1,4 +1,5 @@
 "use strict";
+
 // Cliente mínimo para falar com o Supabase (login e banco), sem bibliotecas de terceiros.
 // Usa só a chave PÚBLICA; a proteção real está nas regras do banco (RLS).
 const { SUPABASE_URL, SUPABASE_ANON_KEY } = window.CONFIG;
@@ -13,6 +14,7 @@ const guardar = (d) => {
   };
   sessionStorage.setItem("refresh", d.refresh_token); // some quando a aba é fechada
 };
+
 const limpar = () => {
   sessao = null;
   sessionStorage.removeItem("refresh");
@@ -29,6 +31,7 @@ async function autenticacao(caminho, corpo, token) {
       },
       body: JSON.stringify(corpo),
     });
+
     return {
       ok: r.ok,
       status: r.status,
@@ -44,6 +47,7 @@ async function entrar(email, senha) {
     email,
     password: senha,
   });
+
   if (r.ok) guardar(r.dados);
   return r;
 }
@@ -51,40 +55,53 @@ async function entrar(email, senha) {
 async function renovar() {
   const refresh = sessao?.refresh || sessionStorage.getItem("refresh");
   if (!refresh) return false;
+
   const r = await autenticacao("token?grant_type=refresh_token", {
     refresh_token: refresh,
   });
+
   if (r.ok) guardar(r.dados);
   else if (r.status >= 400 && r.status < 500) limpar();
+
   return r.ok;
 }
 
 async function tokenAtual() {
-  if (sessao && sessao.expira - Date.now() > 60000) return sessao.token;
+  if (sessao && sessao.expira - Date.now() > 60000) {
+    return sessao.token;
+  }
+
   return (await renovar()) ? sessao.token : null;
 }
 
 async function sair() {
-  if (sessao) await autenticacao("logout?scope=local", {}, sessao.token);
+  if (sessao) {
+    await autenticacao("logout?scope=local", {}, sessao.token);
+  }
+
   limpar();
 }
 
 // Fala com as tabelas. Com logado:true usa o login do presidente; sem isso, é um visitante comum.
 async function rest(caminho, { metodo = "GET", corpo, logado = false } = {}) {
   const cabecalhos = { apikey: SUPABASE_ANON_KEY };
+
   if (logado) {
     const token = await tokenAtual();
     if (!token) return { ok: false, status: 401, dados: null };
     cabecalhos.Authorization = `Bearer ${token}`;
   }
+
   if (corpo) cabecalhos["Content-Type"] = "application/json";
   if (metodo !== "GET") cabecalhos.Prefer = "return=minimal";
+
   try {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/${caminho}`, {
       method: metodo,
       headers: cabecalhos,
       body: corpo && JSON.stringify(corpo),
     });
+
     return {
       ok: r.ok,
       status: r.status,
@@ -101,20 +118,65 @@ async function souPresidente() {
   return r.ok && r.dados.length === 1;
 }
 
-// O formulário de inscrição passa pela Edge Function "cadastro" (captcha, limite de pedidos e validação)
+// ============================================================
+// CLOUDFLARE TURNSTILE — DESATIVADO TEMPORARIAMENTE
+// Mantido comentado para poder reativar depois.
+//
+// O código de carregamento, renderização, callbacks e validação
+// do Turnstile deve permanecer comentado no arquivo principal.
+//
+// ============================================================
+
+/*
+let turnstileId = null;
+let turnstileToken = "";
+
+function iniciarTurnstile() {
+  if (!CONFIG.TURNSTILE_SITE_KEY) return;
+
+  const montar = () => {
+    if (turnstileId !== null) return turnstile.reset(turnstileId);
+
+    turnstileId = turnstile.render("#turnstile", {
+      sitekey: CONFIG.TURNSTILE_SITE_KEY,
+      callback: (token) => (turnstileToken = token),
+      "expired-callback": () => (turnstileToken = ""),
+    });
+  };
+
+  if (window.turnstile) return montar();
+
+  const s = document.createElement("script");
+  s.src =
+    "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+  s.async = true;
+  s.onload = montar;
+  document.head.append(s);
+}
+*/
+
+// Formulário de inscrição: envia os dados para a Edge Function "cadastro".
+// A validação do captcha pode continuar ativa no servidor.
 async function enviarCadastro(corpo) {
   try {
     const r = await fetch(`${SUPABASE_URL}/functions/v1/cadastro`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(corpo),
     });
+
     return {
       ok: r.ok,
       status: r.status,
       ...(await r.json().catch(() => ({}))),
     };
   } catch {
-    return { ok: false, status: 0, erro: "Sem conexão com o servidor." };
+    return {
+      ok: false,
+      status: 0,
+      erro: "Sem conexão com o servidor.",
+    };
   }
 }
