@@ -130,19 +130,25 @@ function cpfValido(cpf) {
 }
 
 // Captcha (Cloudflare Turnstile): carregado só quando a página de inscrição abre
+/*
 let turnstileId = null,
   turnstileToken = "";
+
 function iniciarTurnstile() {
   if (!CONFIG.TURNSTILE_SITE_KEY) return;
+
   const montar = () => {
     if (turnstileId !== null) return turnstile.reset(turnstileId);
+
     turnstileId = turnstile.render("#turnstile", {
       sitekey: CONFIG.TURNSTILE_SITE_KEY,
       callback: (token) => (turnstileToken = token),
       "expired-callback": () => (turnstileToken = ""),
     });
   };
+
   if (window.turnstile) return montar();
+
   const s = document.createElement("script");
   s.src =
     "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
@@ -150,6 +156,7 @@ function iniciarTurnstile() {
   s.onload = montar;
   document.head.append(s);
 }
+*/
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -181,12 +188,12 @@ form.addEventListener("submit", async (e) => {
   const r = await enviarCadastro({
     ...d,
     aceite: true,
-    turnstile: turnstileToken,
+  //  turnstile: turnstileToken,
   });
   botao.disabled = false;
 
-  if (turnstileId !== null) turnstile.reset(turnstileId); // cada captcha vale uma vez só
-  turnstileToken = "";
+  //if (turnstileId !== null) turnstile.reset(turnstileId); // cada captcha vale uma vez só
+  //turnstileToken = "";
 
   if (!r.ok)
     return (erro.textContent =
@@ -442,7 +449,7 @@ async function trocarPagina() {
   if (alvo && pagina === inicio) alvo.scrollIntoView();
   else scrollTo({ top: 0, behavior: "instant" });
 
-  if (hash === "#associe-se") iniciarTurnstile();
+  //if (hash === "#associe-se") iniciarTurnstile();
   if (hash === "#publicar-evento") {
     limparEdicao();
     mostrarEventos();
