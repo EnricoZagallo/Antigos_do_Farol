@@ -1,0 +1,26 @@
+# O plano gratuito do Supabase pausa o projeto após 1 semana sem atividade.
+# Este roteiro faz uma leitura simples de eventos a cada 3 dias para evitar isso.
+# (O GitHub desliga roteiros agendados se o repositório ficar 60 dias sem nenhuma alteração:
+#  se isso acontecer, reative na aba Actions.)
+name: Manter Supabase ativo
+
+on:
+  schedule:
+    - cron: '0 12 */3 * *'
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ler um evento (atividade no banco)
+        env:
+          URL: ${{ vars.SUPABASE_URL }}
+          CHAVE: ${{ vars.SUPABASE_ANON_KEY }}
+        run: |
+          curl --fail --silent --show-error --retry 3 \
+            "$URL/rest/v1/eventos?select=id&limit=1" \
+            -H "apikey: $CHAVE" -o /dev/null
+          echo "Supabase respondeu normalmente."

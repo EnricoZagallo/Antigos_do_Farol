@@ -1,0 +1,19 @@
+# Segredos e dados: NUNCA devem ir para o repositório público
+.env
+.env.*
+*.env
+variaveis*
+backup*
+exportacao*
+*.csv
+*.dump
+*.sql.gz
+servidor/
+dados/
+
+# Sistema e ferramentas
+node_modules/
+.DS_Store
+Thumbs.db
+supabase/.temp/
+supabase/.branches/
