@@ -173,8 +173,8 @@ form.addEventListener("submit", async (e) => {
   if (!d.aceite)
     return (erro.textContent =
       "Aceite a política de privacidade para enviar o cadastro.");
-  if (!turnstileToken)
-    return (erro.textContent = "Confirme que você não é um robô.");
+  //if (!turnstileToken)
+  // return (erro.textContent = "Confirme que você não é um robô.");
 
   const botao = form.querySelector("button");
   botao.disabled = true; // evita cliques repetidos
