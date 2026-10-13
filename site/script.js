@@ -81,6 +81,9 @@ const seguro = (texto) =>
   texto.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`); // evita HTML dentro dos textos
 
 async function mostrarEventos() {
+  const lista = $("#eventos-lista");
+  if (!lista.children.length)
+    lista.innerHTML = '<div class="skeleton"></div>'.repeat(3); // carregando
   const r = await rest("eventos?select=*&order=data.asc,hora.asc");
   const todos = r.dados || [],
     hoje = dataDeHoje();
@@ -129,35 +132,6 @@ function cpfValido(cpf) {
   return digito(9) === +cpf[9] && digito(10) === +cpf[10];
 }
 
-// Captcha (Cloudflare Turnstile): carregado só quando a página de inscrição abre
-/*
-let turnstileId = null,
-  turnstileToken = "";
-
-function iniciarTurnstile() {
-  if (!CONFIG.TURNSTILE_SITE_KEY) return;
-
-  const montar = () => {
-    if (turnstileId !== null) return turnstile.reset(turnstileId);
-
-    turnstileId = turnstile.render("#turnstile", {
-      sitekey: CONFIG.TURNSTILE_SITE_KEY,
-      callback: (token) => (turnstileToken = token),
-      "expired-callback": () => (turnstileToken = ""),
-    });
-  };
-
-  if (window.turnstile) return montar();
-
-  const s = document.createElement("script");
-  s.src =
-    "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-  s.async = true;
-  s.onload = montar;
-  document.head.append(s);
-}
-*/
-
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(form));
@@ -180,20 +154,11 @@ form.addEventListener("submit", async (e) => {
   if (!d.aceite)
     return (erro.textContent =
       "Aceite a política de privacidade para enviar o cadastro.");
-  //if (!turnstileToken)
-  // return (erro.textContent = "Confirme que você não é um robô.");
 
   const botao = form.querySelector("button");
   botao.disabled = true; // evita cliques repetidos
-  const r = await enviarCadastro({
-    ...d,
-    aceite: true,
-  //  turnstile: turnstileToken,
-  });
+  const r = await enviarCadastro({ ...d, aceite: true });
   botao.disabled = false;
-
-  //if (turnstileId !== null) turnstile.reset(turnstileId); // cada captcha vale uma vez só
-  //turnstileToken = "";
 
   if (!r.ok)
     return (erro.textContent =
@@ -449,7 +414,6 @@ async function trocarPagina() {
   if (alvo && pagina === inicio) alvo.scrollIntoView();
   else scrollTo({ top: 0, behavior: "instant" });
 
-  //if (hash === "#associe-se") iniciarTurnstile();
   if (hash === "#publicar-evento") {
     limparEdicao();
     mostrarEventos();
@@ -479,7 +443,7 @@ addEventListener(
     botaoTopo.classList.toggle("show", y > 700);
     ultimoY = y;
 
-    foto.style.setProperty("--shift", Math.min(y * 0.08, 28)); // a imagem do topo desliza ao rolar
+    foto.style.setProperty("--shift", Math.min(y * 0.12, 70)); // a imagem do topo desliza ao rolar
 
     const r = linha.getBoundingClientRect(); // linha do tempo "desenha" ao rolar
     linha.style.setProperty(
@@ -508,3 +472,25 @@ const secoes = new IntersectionObserver(
 ["historia", "eventos", "presidentes", "faq"].forEach((id) =>
   secoes.observe(document.getElementById(id)),
 );
+
+/* ---------- Botões "magnéticos": puxam levemente em direção ao mouse ---------- */
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  $$(".btn").forEach((botao) => {
+    botao.addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      const r = botao.getBoundingClientRect();
+      botao.style.setProperty(
+        "--mx",
+        (e.clientX - r.left - r.width / 2) * 0.18 + "px",
+      );
+      botao.style.setProperty(
+        "--my",
+        (e.clientY - r.top - r.height / 2) * 0.3 + "px",
+      );
+    });
+    botao.addEventListener("pointerleave", () => {
+      botao.style.removeProperty("--mx");
+      botao.style.removeProperty("--my");
+    });
+  });
+}

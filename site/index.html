@@ -6,15 +6,15 @@
       name="viewport"
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
-    <title>Clássicos do Atlântico — Clube de Automóveis Antigos</title>
+    <title>Antigos do Farol — Clube de Automóveis Antigos</title>
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co; frame-src https://challenges.cloudflare.com; object-src 'none'; base-uri 'none'; form-action 'none'"
+      content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; style-src-attr 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
     <meta name="referrer" content="no-referrer" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400&family=Inter:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -30,50 +30,47 @@
           <a href="#presidentes">Presidentes</a>
           <a href="#faq">Dúvidas</a>
         </nav>
-        <a class="btn" href="#associe-se">Associe-se</a>
+        <a class="btn solid" href="#associe-se">Associe-se</a>
       </div>
     </header>
 
     <!-- PÁGINA INICIAL -->
     <main id="home">
-      <section class="hero" id="topo">
-        <div class="wrap">
-          <h1 id="titulo">Antigos Do Farol</h1>
-          <div class="intro">
+      <section class="hero dark" id="topo">
+        <div class="hero-photo" id="foto">
+          <img
+            src="img/hero.jpg"
+            alt="Chevrolet Bel Air clássico em movimento numa estrada"
+          />
+        </div>
+        <div class="wrap hero-inner">
+          <div class="hero-main">
+            <p class="eyebrow">
+              <span class="dot"></span>Clube de automóveis antigos · desde 1974
+            </p>
+            <h1 id="titulo">Antigos Do Farol</h1>
+          </div>
+          <div class="hero-side">
             <p class="lead">
-              Há mais de 15 anos reunimos quem restaura, conserva e dirige
-              automóveis antigos.
+              Há mais de cinquenta anos reunimos quem restaura, conserva e
+              dirige automóveis antigos. Venha rodar com a gente.
             </p>
             <div class="actions">
-              <a class="btn" href="#eventos">Ver próximos eventos</a>
+              <a class="btn solid" href="#eventos">Ver próximos eventos</a>
               <a class="btn" href="#historia">Conhecer a história</a>
             </div>
           </div>
-        </div>
-        <div class="wrap">
-          <div class="hero-photo" id="foto">
-            <img
-              src="img/hero.jpg"
-              alt="Chevrolet Bel Air clássico em movimento numa estrada"
-            />
-          </div>
-        </div>
-        <div class="stats">
-          <div class="rv">
-            <span class="check"></span
-            ><span>Fundado em <b data-to="2011">2011</b></span>
-          </div>
-          <div class="rv">
-            <span class="check"></span
-            ><span><b data-to="100">100</b> associados</span>
-          </div>
-          <div class="rv">
-            <span class="check"></span
-            ><span>Mais de <b data-to="200">200</b> veículos</span>
-          </div>
-          <div class="rv">
-            <span class="check"></span
-            ><span><b data-to="12">12</b> eventos por ano</span>
+          <div class="stats">
+            <div class="rv">
+              <b data-to="1974">1974</b><span>Ano de fundação</span>
+            </div>
+            <div class="rv">
+              <b data-to="320">320</b><span>Associados</span>
+            </div>
+            <div class="rv"><b data-to="410">410</b><span>Veículos</span></div>
+            <div class="rv">
+              <b data-to="12">12</b><span>Eventos por ano</span>
+            </div>
           </div>
         </div>
       </section>
@@ -91,66 +88,70 @@
       <section id="historia">
         <div class="wrap split">
           <div class="rv">
+            <p class="eyebrow">01 · História</p>
             <h2>Nossa história</h2>
             <p class="lead">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since 1966, when designers at Letraset and James Mosley, the
-              librarian at St Bride Printing Library in London, took a 1914
-              Cicero translation.
+              Começamos com seis amigos e uma garagem emprestada. Hoje somos um
+              clube com sede própria, oficina compartilhada e um calendário que
+              enche todo ano.
             </p>
           </div>
           <ol class="timeline" id="linha" data-st>
             <li>
-              <b>2011</b>
+              <b>1974</b>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Seis colecionadores se reúnem para fundar o clube e realizam o
+                primeiro passeio com onze carros.
               </p>
             </li>
             <li>
-              <b>2014</b>
+              <b>1986</b>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Inauguração da sede própria, com garagem coletiva e biblioteca
+                de manuais técnicos.
               </p>
             </li>
             <li>
-              <b>2018</b>
+              <b>1998</b>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Primeiro Encontro Anual de Clássicos, aberto ao público e hoje o
+                maior evento do calendário.
               </p>
             </li>
             <li>
-              <b>2022</b>
+              <b>2009</b>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Criação da oficina-escola, onde associados mais experientes
+                ensinam restauração aos novatos.
               </p>
             </li>
             <li>
-              <b>2026</b>
+              <b>2024</b>
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Cinquenta anos de clube, com desfile comemorativo e exposição do
+                acervo histórico.
               </p>
             </li>
           </ol>
         </div>
       </section>
 
-      <section id="eventos" class="light">
+      <section id="eventos" class="dark">
+        <img class="bg-wheel" src="img/roda.svg" alt="" aria-hidden="true" />
         <div class="wrap">
+          <p class="eyebrow rv">02 · Agenda</p>
           <h2 class="rv">Eventos</h2>
+          <p class="lead rv">
+            Passeios, exposições e encontros. Todos são bem-vindos.
+          </p>
           <!-- Os cartões são criados pelo script.js a partir da lista de eventos -->
           <div class="grid" id="eventos-lista"></div>
         </div>
       </section>
 
       <section id="presidentes">
-        <img class="bg-wheel" src="img/roda.svg" alt="" aria-hidden="true" />
         <div class="wrap">
+          <p class="eyebrow rv">03 · Presidentes</p>
           <h2 class="rv">Presidentes</h2>
           <p class="lead rv">Quem conduziu o clube desde a fundação.</p>
           <!-- Para colocar a foto, escreva dentro de cada <div class="photo">: <img src="img/nome.jpg" alt="Nome"> -->
@@ -183,9 +184,12 @@
         </div>
       </section>
 
-      <section id="faq" class="light">
-        <div class="wrap">
-          <h2 class="rv">Dúvidas frequentes</h2>
+      <section id="faq" class="dark">
+        <div class="wrap faq-layout">
+          <div class="rv">
+            <p class="eyebrow">04 · Dúvidas</p>
+            <h2>Dúvidas frequentes</h2>
+          </div>
           <div class="faq" data-st>
             <details>
               <summary>Preciso ter um carro antigo para entrar?</summary>
@@ -218,6 +222,7 @@
 
       <footer>
         <div class="wrap">
+          <p class="wordmark" aria-hidden="true">Antigos do Farol</p>
           <span>© 2026 Antigos do Farol. Todos os direitos reservados.</span>
           <nav class="foot-links">
             <a href="#privacidade">Política de Privacidade</a>
@@ -229,33 +234,33 @@
 
     <!-- PÁGINA DE INSCRIÇÃO -->
     <main id="inscricao" hidden>
-      <section>
-        <div class="wrap">
-          <a class="back" href="#topo">Voltar ao início</a>
-          <h1 class="rv">Associe-se</h1>
-          <p class="lead rv">
-            Preencha os dados abaixo. Seu cadastro será analisado pelos
-            presidentes do clube.
-          </p>
-
-          <h3 class="rv">Como funciona</h3>
-          <div class="steps" data-st>
-            <div>
-              <b>1</b>
-              <p>Você envia o formulário abaixo.</p>
-            </div>
-            <div>
-              <b>2</b>
-              <p>O presidente recebe o cadastro e a diretoria aprova.</p>
-            </div>
-            <div>
-              <b>3</b>
-              <p>
-                Você recebe as boas-vindas e o convite para o próximo evento.
-              </p>
+      <section class="dark">
+        <div class="wrap join">
+          <div class="join-info">
+            <a class="back" href="#topo">Voltar ao início</a>
+            <p class="eyebrow">Associe-se</p>
+            <h1 class="rv">Faça parte do clube.</h1>
+            <p class="lead rv">
+              Preencha os dados ao lado. Seu cadastro será analisado pelos
+              presidentes do clube.
+            </p>
+            <div class="steps" data-st>
+              <div>
+                <b>1</b>
+                <p>Você envia o formulário abaixo.</p>
+              </div>
+              <div>
+                <b>2</b>
+                <p>O presidente recebe o cadastro e a diretoria aprova.</p>
+              </div>
+              <div>
+                <b>3</b>
+                <p>
+                  Você recebe as boas-vindas e o convite para o próximo evento.
+                </p>
+              </div>
             </div>
           </div>
-
           <form class="form rv" id="form" novalidate>
             <label class="full"
               >Nome completo<input name="nome" autocomplete="name"
@@ -295,16 +300,16 @@
                 autocomplete="off"
             /></label>
             <label class="full terms"
-              ><input type="checkbox" name="aceite" /> Li e aceito a&nbsp;<a
-                href="#privacidade"
-                target="_blank"
-                rel="noopener"
-                >Política de Privacidade.</a
-              >&nbsp;</label
+              ><input type="checkbox" name="aceite" /><span
+                >Li e aceito a
+                <a href="#privacidade" target="_blank" rel="noopener"
+                  >Política de Privacidade</a
+                >
+                e o estatuto do clube.</span
+              ></label
             >
-            <div class="full" id="turnstile"></div>
             <p class="error full" id="erro" role="alert"></p>
-            <button class="btn" type="submit">Enviar cadastro</button>
+            <button class="btn solid" type="submit">Enviar cadastro</button>
             <div class="success" id="sucesso" role="status"></div>
           </form>
         </div>
@@ -320,13 +325,13 @@
           <p class="lead rv">
             Explicamos aqui, de forma simples, como o clube trata os seus dados
             pessoais, conforme a Lei Geral de Proteção de Dados (LGPD, Lei nº
-            13.709/2018).
+            13.709/2018). Última atualização: [DATA].
           </p>
 
           <h3>1. Quem é responsável</h3>
           <p>
-            Clube Antigos do Farol, CNPJ [CNPJ]. Contato para assuntos de
-            privacidade: [E-MAIL DE CONTATO].
+            [NOME COMPLETO DO CLUBE], CNPJ [CNPJ], com sede em [ENDEREÇO].
+            Contato para assuntos de privacidade: [E-MAIL DE CONTATO].
           </p>
 
           <h3>2. Quais dados coletamos</h3>
@@ -356,11 +361,10 @@
             Não vendemos nem repassamos os seus dados. Eles são acessados apenas
             pelos presidentes do clube. Para o site funcionar usamos prestadores
             que atuam como operadores e só guardam ou processam os dados para
-            nós: o GitHub (hospedagem das páginas), o Supabase (banco de dados e
-            login; servidores na região [REGIÃO, ex.: São Paulo, Brasil]) e o
-            Cloudflare (verificação anti-robô Turnstile). O site também carrega
-            fontes do Google Fonts, o que faz o seu navegador se conectar aos
-            servidores do Google.
+            nós: o GitHub (hospedagem das páginas) e o Supabase (banco de dados
+            e login; servidores na região [REGIÃO, ex.: São Paulo, Brasil]). O
+            site também carrega fontes do Google Fonts, o que faz o seu
+            navegador se conectar aos servidores do Google.
           </p>
 
           <h3>6. Por quanto tempo guardamos</h3>
@@ -383,17 +387,15 @@
           <p>
             A conexão é segura (HTTPS), os cadastros ficam em um banco de dados
             protegido por regras de acesso (só os presidentes, com login e
-            senha, conseguem ler), há limite de tentativas e verificação
-            anti-robô, e o código do site é público para que possa ser auditado.
+            senha, conseguem ler), há limite de tentativas, e o código do site é
+            público para que possa ser auditado.
           </p>
 
           <h3>9. Cookies</h3>
           <p>
             Não usamos cookies de publicidade nem de rastreamento. Guardamos
             apenas um dado técnico temporário no navegador dos presidentes para
-            manter o login, que some ao fechar a aba. A verificação anti-robô
-            (Cloudflare Turnstile) pode usar armazenamento técnico próprio para
-            distinguir pessoas de robôs.
+            manter o login, que some ao fechar a aba.
           </p>
         </div>
       </section>
@@ -401,7 +403,7 @@
 
     <!-- PÁGINA DE LOGIN DOS PRESIDENTES -->
     <main id="login" hidden>
-      <section>
+      <section class="dark">
         <div class="wrap">
           <a class="back" href="#topo">Voltar ao início</a>
           <h1 class="rv">Entrar</h1>
@@ -418,7 +420,7 @@
                 autocomplete="current-password"
             /></label>
             <p class="error" id="erro-login" role="alert"></p>
-            <button class="btn" type="submit">Entrar</button>
+            <button class="btn solid" type="submit">Entrar</button>
           </form>
         </div>
       </section>
@@ -426,7 +428,7 @@
 
     <!-- PÁGINA DOS PRESIDENTES: PUBLICAR EVENTO E VER CADASTROS -->
     <main id="publicar" hidden>
-      <section>
+      <section class="dark">
         <div class="wrap">
           <div class="topline">
             <a class="back" href="#topo">Voltar ao início</a>
@@ -450,7 +452,7 @@
             </label>
             <p class="error full" id="erro-evento" role="alert"></p>
             <div class="full actions">
-              <button class="btn" id="salvar-evento" type="submit">
+              <button class="btn solid" id="salvar-evento" type="submit">
                 Publicar evento
               </button>
               <button class="pill" id="cancelar-edicao" type="button" hidden>
