@@ -268,7 +268,7 @@ body:has(#home:not([hidden])) .nav:not(.scrolled) .logo img,
 body:has(#inscricao:not([hidden])) .nav:not(.scrolled) .logo img,
 body:has(#login:not([hidden])) .nav:not(.scrolled) .logo img,
 body:has(#publicar:not([hidden])) .nav:not(.scrolled) .logo img {
-  filter: brightness(0) invert(1);
+  filter: brightness(1) invert(0);
 }
 main:not(#home) > section {
   padding-top: 180px;
