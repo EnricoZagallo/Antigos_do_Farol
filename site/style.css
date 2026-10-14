@@ -345,7 +345,7 @@ main:not(#home) > section {
 .hero {
   position: relative;
   display: flex;
-  min-height: 100dvh;
+  min-height: min(100dvh, 66vw);
   padding: 0;
   overflow: hidden;
 }
@@ -989,10 +989,42 @@ footer .wrap {
   .join {
     grid-template-columns: 1fr;
   }
+  /* topo no celular: a foto fica inteira em cima (sem esticar) e o texto sobe sobre a parte de baixo dela */
+  .hero {
+    display: block;
+    min-height: 0;
+    background: var(--green);
+  }
+  .hero::before {
+    display: none;
+  }
+  .hero-photo {
+    position: relative;
+    inset: auto;
+    height: min(88vw, 520px);
+  }
+  .hero-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(14, 34, 25, 0.6) 0%,
+      rgba(14, 34, 25, 0) 30%,
+      rgba(14, 34, 25, 0.15) 50%,
+      var(--green) 97%
+    );
+  }
+  .hero-photo img {
+    transform: scale(1.03);
+    object-position: center 45%;
+  }
   .hero-inner {
     grid-template-columns: 1fr;
     grid-template-areas: "main" "side" "stats";
-    padding-top: 150px;
+    margin-top: -48px;
+    padding-top: 0;
+    padding-bottom: 28px;
   }
   .split > div,
   .join-info {
