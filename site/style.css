@@ -1002,17 +1002,19 @@ footer .wrap {
     position: relative;
     inset: auto;
     height: min(88vw, 520px);
-  }
+    overflow: hidden;
+  } /* corta o zoom da foto: sem faixa de imagem fora do banner */
   .hero-photo::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(14, 34, 25, 0.6) 0%,
-      rgba(14, 34, 25, 0) 30%,
-      rgba(14, 34, 25, 0.15) 50%,
-      var(--green) 97%
+      rgba(14, 34, 25, 0.7) 0%,
+      rgba(14, 34, 25, 0.05) 34%,
+      rgba(14, 34, 25, 0.2) 55%,
+      var(--green) 96%,
+      var(--green) 100%
     );
   }
   .hero-photo img {
