@@ -319,6 +319,9 @@ main:not(#home) > section {
 .links a.active::after {
   transform: scaleX(1);
 }
+.menu-btn {
+  display: none;
+}
 #topo-btn {
   position: fixed;
   right: 20px;
@@ -975,19 +978,115 @@ footer .wrap {
 
 /* ---------- Celular ---------- */
 @media (max-width: 860px) {
+  :root {
+    --nav-h: 97px;
+  } /* altura do cabeçalho no celular */
   html {
-    scroll-padding-top: 100px;
+    scroll-padding-top: calc(var(--nav-h) + 12px);
+  }
+  /* cabeçalho no celular: uma linha só, barra verde sólida: logo à esquerda; botão "Associe-se" e botão de menu à direita.
+     Os links ficam no menu, que abre numa faixa logo abaixo da barra. */
+  .nav,
+  .nav.scrolled {
+    background: var(--green);
+    color: var(--beige);
+    border-bottom: 1px solid rgba(226, 217, 195, 0.14);
+    backdrop-filter: none;
+    box-shadow: none;
   }
   .nav .wrap {
-    grid-template-columns: 1fr auto;
-    row-gap: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  .logo {
+    margin-right: auto;
+  }
+  .nav .btn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+  .menu-btn {
+    position: relative;
+    display: block;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(226, 217, 195, 0.35);
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      transform 0.15s;
+  }
+  .menu-btn:hover {
+    background: rgba(226, 217, 195, 0.12);
+  }
+  .menu-btn:active {
+    transform: scale(0.95);
+  }
+  .menu-btn span {
+    position: absolute;
+    left: 13px;
+    right: 13px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.35s var(--ease);
+  }
+  .menu-btn span:nth-child(1) {
+    top: 17px;
+  }
+  .menu-btn span:nth-child(2) {
+    top: 25px;
+  }
+  .nav.menu-open .menu-btn span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+  }
+  .nav.menu-open .menu-btn span:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
   }
   .links {
-    grid-column: 1 / -1;
-    order: 3;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 20px 16px;
+    border-bottom: 1px solid rgba(226, 217, 195, 0.14);
+    background: var(--green);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition:
+      opacity 0.3s,
+      transform 0.3s var(--ease),
+      visibility 0.3s;
+  }
+  .nav.menu-open .links {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+  .links a {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(226, 217, 195, 0.12);
+    font-size: 17px;
+  }
+  .links a:last-child {
+    border-bottom: 0;
+  }
+  .links a::after {
+    display: none;
+  }
+  main:not(#home) > section {
+    padding-top: calc(var(--nav-h) + 36px);
   }
   .split,
   .faq-layout,
@@ -998,6 +1097,7 @@ footer .wrap {
   .hero {
     display: block;
     min-height: 0;
+    padding-top: var(--nav-h);
     background: var(--green);
   }
   .hero::before {
@@ -1015,8 +1115,8 @@ footer .wrap {
     inset: 0;
     background: linear-gradient(
       180deg,
-      rgba(14, 34, 25, 0.7) 0%,
-      rgba(14, 34, 25, 0.05) 34%,
+      var(--green) 0%,
+      rgba(14, 34, 25, 0) 26%,
       rgba(14, 34, 25, 0.2) 55%,
       var(--green) 96%,
       var(--green) 100%

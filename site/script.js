@@ -494,3 +494,42 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
     });
   });
 }
+
+/* ---------- Menu do celular: botão que abre e fecha os links do cabeçalho ---------- */
+const cabecalho = $("#nav"),
+  links = $(".links");
+const botaoMenu = document.createElement("button");
+botaoMenu.className = "menu-btn";
+botaoMenu.type = "button";
+botaoMenu.setAttribute("aria-controls", "menu-links");
+botaoMenu.innerHTML = "<span></span><span></span>";
+links.id = "menu-links";
+cabecalho.querySelector(".wrap").append(botaoMenu);
+
+function menuAberto(aberto) {
+  cabecalho.classList.toggle("menu-open", aberto);
+  botaoMenu.setAttribute("aria-expanded", aberto);
+  botaoMenu.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+}
+menuAberto(false);
+
+botaoMenu.addEventListener("click", () =>
+  menuAberto(!cabecalho.classList.contains("menu-open")),
+);
+links.addEventListener("click", (e) => {
+  if (e.target.closest("a")) menuAberto(false);
+}); // escolheu um link: fecha
+document.addEventListener("click", (e) => {
+  if (!cabecalho.contains(e.target)) menuAberto(false);
+}); // tocou fora: fecha
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape") menuAberto(false);
+});
+addEventListener("hashchange", () => menuAberto(false));
+addEventListener(
+  "scroll",
+  () => {
+    if (cabecalho.classList.contains("hidden")) menuAberto(false);
+  },
+  { passive: true },
+);
