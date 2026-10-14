@@ -591,6 +591,7 @@ main:not(#home) > section {
 .card {
   display: grid;
   grid-template-columns: minmax(150px, 230px) 1fr;
+  grid-template-rows: auto 1fr;
   column-gap: 40px;
   padding: 32px 0;
   align-content: start;
@@ -613,6 +614,10 @@ main:not(#home) > section {
   font: 500 12px/1.5 var(--mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+.card .when small.ano {
+  margin-top: 8px;
+  color: var(--accent);
 }
 .card h4 {
   margin: 0;

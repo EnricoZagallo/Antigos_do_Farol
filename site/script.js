@@ -96,7 +96,7 @@ async function mostrarEventos() {
           .map(
             (e, i) => `
         <article class="card pop" style="--delay:${i * 0.08}s">
-          <div class="when">${e.data.slice(8)} ${MESES[+e.data.slice(5, 7) - 1]}<small>${seguro(e.hora)}</small><small>${seguro(e.local)}</small></div>
+          <div class="when">${e.data.slice(8)} ${MESES[+e.data.slice(5, 7) - 1]}<small class="ano">${e.data.slice(0, 4)}</small><small>${seguro(e.hora)}</small><small>${seguro(e.local)}</small></div>
           <h4>${seguro(e.titulo)}</h4>
           <p>${seguro(e.descricao)}</p>
         </article>`,
